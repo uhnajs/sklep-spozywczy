@@ -1,3 +1,5 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
 import datetime
 
 while True:
@@ -5,8 +7,7 @@ while True:
   x = input("Wybierz 1, 2 lub 3: ")
   if x in ["1", "2", "3"]:
     break
-  else:
-    print("Niepoprawna opcja.")
+ 
 
 products = {
     "001": ("Masło Extra", 6.50),
@@ -23,22 +24,19 @@ products = {
 
 
 while x == "1":
-    print("KOD KRESKOWY | NAZWA")
+    print("KOD KRESKOWY | NAZWA | CENA")
     for code, (name, price) in products.items():
-        print(f"{code} | {name}")
+        print(f"{code} | {name} | {price} zł")
 
+
+    print("-------------")
     print("Wybierz opcję \n1. => Lista wszystkich produktów \n2. => Zakupy \n3. => Zakończ program")
     x = input("Wybierz 1, 2 lub 3: ")
-
-
-  
 
 
 if x == "3":
     exit()
 
-if x == "2":
-    print()
 
 purchased_products = {}
 
@@ -61,7 +59,7 @@ while not done:
 
       print(f"{product_name}")
 
-      price = product_price * VAT_RATE
+      price = product_price
       rounded_price = round(price, 2)
       purchased_products[product_code] = (product_name, rounded_price)
       total_price += rounded_price
@@ -73,8 +71,11 @@ while not done:
     print("Zły kod produktu. Spróbuj ponownie.")
 
 
-total_price_without_vat = total_price / (1 + VAT_RATE1)
-vat = round(total_price - total_price_without_vat, 2)
+total_price_with_vat = total_price / VAT_RATE
+vat = round(total_price_with_vat, 2)
+
+
+rest_vat = round(total_price - vat,2)
 
 now = datetime.datetime.now()
 purchase_date = now.strftime("%m/%d/%Y %H:%M:%S")
@@ -88,6 +89,7 @@ for product_code, (product_name, product_price) in purchased_products.items():
   print(f"{product_name}: {product_price:.2f} zł")
 
 print("---------------------------------")
-print(f"Do zapłaty: {total_price}" " zł")
-print(f"W tym vat: {vat}" " zł")
+print(f"Do zapłaty(brutto): {total_price}" " zł")
+print(f"Do zapłaty(netto): {vat}" " zł")
+print(f"Vat(23%) wynosi:{rest_vat}zł")
 print("---------------------------------")
